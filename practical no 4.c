@@ -11,7 +11,7 @@ void create(struct Node **head) {
     int n, i, value;
     struct Node *newNode, *temp;
 
-    printf("Enter number of nodes: ");
+    printf("\nEnter number of nodes: ");
     scanf("%d", &n);
 
     for (i = 1; i <= n; i++) {
@@ -35,8 +35,6 @@ void create(struct Node **head) {
             temp->next = newNode;
         }
     }
-
-    printf("Linked List created successfully!\n");
 }
 
 // Display Linked List
@@ -48,7 +46,7 @@ void display(struct Node *head) {
         return;
     }
 
-    printf("Linked List: ");
+    printf("\nFinal Linked List:\n");
 
     while (temp != NULL) {
         printf("%d -> ", temp->data);
@@ -62,7 +60,7 @@ void display(struct Node *head) {
 void insertBeginning(struct Node **head) {
     int value;
 
-    printf("Enter value: ");
+    printf("\nEnter value: ");
     scanf("%d", &value);
 
     struct Node *newNode =
@@ -71,15 +69,13 @@ void insertBeginning(struct Node **head) {
     newNode->data = value;
     newNode->next = *head;
     *head = newNode;
-
-    printf("Node inserted successfully!\n");
 }
 
 // Insert at end
 void insertEnd(struct Node **head) {
     int value;
 
-    printf("Enter value: ");
+    printf("\nEnter value: ");
     scanf("%d", &value);
 
     struct Node *newNode =
@@ -100,24 +96,23 @@ void insertEnd(struct Node **head) {
     }
 
     temp->next = newNode;
-
-    printf("Node inserted successfully!\n");
 }
 
 // Delete from beginning
 void deleteBeginning(struct Node **head) {
+    struct Node *temp;
+
     if (*head == NULL) {
-        printf("Linked List is empty!\n");
+        printf("\nLinked List is empty!\n");
         return;
     }
 
-    struct Node *temp = *head;
-
+    temp = *head;
     *head = (*head)->next;
 
     free(temp);
 
-    printf("Node deleted successfully!\n");
+    printf("\nFirst node deleted.\n");
 }
 
 int main() {
@@ -125,14 +120,14 @@ int main() {
     int choice;
 
     do {
-        printf("\n========== SINGLY LINKED LIST ==========\n");
+        printf("\n========== MENU ==========\n");
         printf("1. Create Linked List\n");
-        printf("2. Display Linked List\n");
-        printf("3. Insert at Beginning\n");
-        printf("4. Insert at End\n");
-        printf("5. Delete from Beginning\n");
+        printf("2. Insert at Beginning\n");
+        printf("3. Insert at End\n");
+        printf("4. Delete from Beginning\n");
+        printf("5. Display Linked List\n");
         printf("6. Exit\n");
-        printf("=========================================\n");
+        printf("===========================\n");
 
         printf("Enter your choice: ");
         scanf("%d", &choice);
@@ -144,30 +139,34 @@ int main() {
                 break;
 
             case 2:
-                display(head);
-                break;
-
-            case 3:
                 insertBeginning(&head);
                 break;
 
-            case 4:
+            case 3:
                 insertEnd(&head);
                 break;
 
-            case 5:
+            case 4:
                 deleteBeginning(&head);
                 break;
 
+            case 5:
+                display(head);
+                break;
+
             case 6:
-                printf("Program ended.\n");
+                printf("\nExiting...\n");
                 break;
 
             default:
-                printf("Invalid choice!\n");
+                printf("\nInvalid choice!\n");
         }
 
     } while (choice != 6);
+
+    // Display linked list at the end
+    printf("\n========== FINAL OUTPUT ==========\n");
+    display(head);
 
     return 0;
 }
